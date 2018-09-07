@@ -1,7 +1,7 @@
 <template>
   <div id="app" class="app">
     <c-header></c-header>
-    <c-search-input></c-search-input>
+    <c-search-input v-model="searchCountry"></c-search-input>
   </div>
 </template>
 
@@ -11,6 +11,11 @@ import CSearchInput from '@/components/CSearchInput.vue';
 
 export default {
   name: 'app',
+  data() {
+    return {
+      searchCountry: '',
+    };
+  },
   components: {
     CHeader,
     CSearchInput,

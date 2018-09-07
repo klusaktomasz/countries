@@ -1,12 +1,21 @@
 <template>
   <div class="box">
-    <input type="text" aria-label="Country name" placeholder="Country name">
+    <input type="text"
+           aria-label="Country name"
+           placeholder="Country name"
+           :value="searchCountry"
+           @input="$emit('input', $event.target.value)">
   </div>
 </template>
 
 <script>
 export default {
   name: 'CSearchInput',
+  data() {
+    return {
+      searchCountry: '',
+    };
+  },
 };
 </script>
 
@@ -15,6 +24,11 @@ export default {
   margin-top: 40px;
   max-width: 360px;
   width: 100%;
+
+  &.focus {
+    top: 0;
+    position: absolute;
+  }
 }
 
 input {
