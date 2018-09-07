@@ -15,6 +15,7 @@ export default {
 header {
   text-align: center;
   position: relative;
+  margin: 20px;
 
   &:before,
   &:after {
