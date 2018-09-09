@@ -15,7 +15,8 @@ export default {
 header {
   text-align: center;
   position: relative;
-  margin: 20px;
+  padding: 20px;
+  box-sizing: border-box;
 
   &:before,
   &:after {
@@ -28,16 +29,16 @@ header {
   }
 
   &:before {
-    left: -20px;
-    top: -20px;
+    left: 0;
+    top: 0;
     border-left: 1px solid #000;
     border-top: 1px solid #000;
     border-top-left-radius: 10%;
   }
 
   &:after {
-    right: -20px;
-    bottom: -20px;
+    right: 0;
+    bottom: 0;
     border-right: 1px solid #000;
     border-bottom: 1px solid #000;
     border-bottom-right-radius: 10%;
