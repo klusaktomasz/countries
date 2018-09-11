@@ -1,30 +1,30 @@
 <template>
-    <article>
-      <img :src="data.flag" alt="">
+  <article v-if="data">
+    <img :src="data.flag" alt="">
 
-      <header>
-        <h1>{{ data.name }} <span>[{{ data.alpha3Code }}]</span></h1>
-        <p>{{ data.altSpellings[2] }}</p>
-      </header>
+    <header>
+      <h1>{{ data.name }} <span>[{{ data.alpha3Code }}]</span></h1>
+      <p>{{ data.altSpellings[2] }}</p>
+    </header>
 
-      <ul>
-        <li>
-          Capital: <b>{{ data.capital }}</b>, {{ data.region }}
-        </li>
-        <li>
-          Language(s): {{ languages }}
-        </li>
-        <li>
-          Currencie(s): {{ currencies }}
-        </li>
-        <li>
-          Domain: {{ data.topLevelDomain[0] }}
-        </li>
-        <li>
-          Borders: {{ data.borders.join(', ') || 'none' }}
-        </li>
-      </ul>
-    </article>
+    <ul>
+      <li>
+        Capital: <b>{{ data.capital }}</b>, {{ data.region }}
+      </li>
+      <li>
+        Language(s): {{ languages }}
+      </li>
+      <li>
+        Currencie(s): {{ currencies }}
+      </li>
+      <li>
+        Domain: {{ data.topLevelDomain[0] }}
+      </li>
+      <li>
+        Borders: {{ data.borders.join(', ') || 'none' }}
+      </li>
+    </ul>
+  </article>
 </template>
 
 <script>
@@ -65,6 +65,11 @@ article {
               0px 0px 8px rgba(0, 0, 0, 0.12);
 }
 
+.error {
+  margin: 0;
+  text-align: center;
+}
+
 img {
   display: block;
   margin-bottom: 20px;
@@ -72,7 +77,6 @@ img {
   max-width: 320px;
   width: 100%;
 }
-
 
 ul {
   margin: 20px 0 0 0;

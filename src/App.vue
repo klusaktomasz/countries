@@ -12,10 +12,12 @@
 
     <transition name="fade" mode="out-in">
       <c-country v-if="fetchData && searchCountry"
-                 :key="fetchData"
+                 :key="fetchData.name"
                  :data="fetchData[0]"
                  class="country"></c-country>
     </transition>
+
+    <c-loading v-if="loading"></c-loading>
   </div>
 </template>
 
@@ -27,6 +29,7 @@ import anime from 'animejs';
 import CHeader from '@/components/CHeader.vue';
 import CSearchInput from '@/components/CSearchInput.vue';
 import CCountry from '@/components/CCountry.vue';
+import CLoading from '@/components/CLoading.vue';
 
 const API_LINK = 'https://restcountries.eu/rest/v2';
 
@@ -43,6 +46,7 @@ export default {
     CHeader,
     CSearchInput,
     CCountry,
+    CLoading,
   },
   watch: {
     searchCountry: function () {
@@ -61,9 +65,11 @@ export default {
       if (this.searchCountry.length === 0) {
         return;
       }
+      this.loading = true;
 
       const response = await axios.get(`${API_LINK}/name/${this.searchCountry}`);
       this.fetchData = response.data;
+      this.loading = false;
     }, 200),
   },
 };
