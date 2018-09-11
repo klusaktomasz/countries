@@ -9,6 +9,13 @@
                     v-model="searchCountry"
                     @input="handleInput"
                     class="input"></c-search-input>
+
+    <transition name="fade" mode="out-in">
+      <c-country v-if="fetchData && searchCountry"
+                 :key="fetchData"
+                 :data="fetchData[0]"
+                 class="country"></c-country>
+    </transition>
   </div>
 </template>
 
@@ -19,6 +26,7 @@ import anime from 'animejs';
 
 import CHeader from '@/components/CHeader.vue';
 import CSearchInput from '@/components/CSearchInput.vue';
+import CCountry from '@/components/CCountry.vue';
 
 const API_LINK = 'https://restcountries.eu/rest/v2';
 
@@ -28,16 +36,17 @@ export default {
     return {
       searchCountry: '',
       loading: false,
-      fetchData: null,
+      fetchData: undefined,
     };
   },
   components: {
     CHeader,
     CSearchInput,
+    CCountry,
   },
   watch: {
     searchCountry: function () {
-      const top = this.searchCountry.length === 0 ? '55%' : 0;
+      const top = this.searchCountry.length === 0 ? '55%' : '10px';
 
       anime({
         targets: this.$refs.input.$el,
@@ -53,10 +62,8 @@ export default {
         return;
       }
 
-      this.loading = true;
-
       const response = await axios.get(`${API_LINK}/name/${this.searchCountry}`);
-      console.log(response);
+      this.fetchData = response.data;
     }, 200),
   },
 };
@@ -97,5 +104,13 @@ body {
   left: 50%;
   top: 55%;
   transform: translate(-50%, -50%);
+}
+
+.country {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 104px;
 }
 </style>
