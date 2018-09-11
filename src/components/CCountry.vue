@@ -25,6 +25,9 @@
       </li>
     </ul>
   </article>
+  <article v-else>
+    <p class="error">We couldn't find country</p>
+  </article>
 </template>
 
 <script>
@@ -67,7 +70,9 @@ article {
 
 .error {
   margin: 0;
+  font-size: 1.5em;
   text-align: center;
+  color: #c50c0c;
 }
 
 img {

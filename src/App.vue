@@ -67,7 +67,12 @@ export default {
       }
       this.loading = true;
 
-      const response = await axios.get(`${API_LINK}/name/${this.searchCountry}`);
+      const response = await axios.get(`${API_LINK}/name/${this.searchCountry}`)
+        .catch(() => {
+          this.fetchData = {};
+          this.loading = false;
+        });
+
       this.fetchData = response.data;
       this.loading = false;
     }, 200),
