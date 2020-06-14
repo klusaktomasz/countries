@@ -1,4 +1,6 @@
 # Countries
-Find any country!
+Demo: https://wonderful-johnson-8d0f77.netlify.app/
 
-Simple project that shows how to use Vue.JS, animejs and axios.
+Simple hello world app using Vue.
+
+**WARN: There are some security vulnerability as it was created a long ago.**
