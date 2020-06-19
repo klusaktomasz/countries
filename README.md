@@ -1,6 +1,24 @@
-# Countries
-Demo: https://wonderful-johnson-8d0f77.netlify.app/
+# countries
 
-Simple hello world app using Vue.
+## Project setup
+```
+yarn install
+```
 
-**WARN: There are some security vulnerability as it was created a long ago.**
+### Compiles and hot-reloads for development
+```
+yarn serve
+```
+
+### Compiles and minifies for production
+```
+yarn build
+```
+
+### Lints and fixes files
+```
+yarn lint
+```
+
+### Customize configuration
+See [Configuration Reference](https://cli.vuejs.org/config/).

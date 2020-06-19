@@ -7,13 +7,13 @@ module.exports = {
     'plugin:vue/essential',
     '@vue/airbnb',
   ],
-  rules: {
-    'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
-    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
-    'linebreak-style': 'off',
-    'object-shorthand': 'off'
-  },
   parserOptions: {
     parser: 'babel-eslint',
+  },
+  rules: {
+    'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
+    'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
+    'no-param-reassign': 0,
+    'import/order': 0,
   },
 };
