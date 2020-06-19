@@ -1,4 +1,7 @@
-# countries
+# Countries
+Demo: (not ready yet!)
+
+Find essential information about a country using Vue, GSAP and restcountries.eu API
 
 ## Project setup
 ```
@@ -15,10 +18,3 @@ yarn serve
 yarn build
 ```
 
-### Lints and fixes files
-```
-yarn lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
