@@ -1,12 +1,17 @@
 <template>
-  <div id="app">
-    <h1>Countries</h1>
+  <div id="app" class="app">
+    <CountriesHeader></CountriesHeader>
   </div>
 </template>
 
 <script>
+import CountriesHeader from '@/components/CountriesHeader.vue';
+
 export default {
   name: 'App',
+  components: {
+    CountriesHeader,
+  },
 };
 </script>
 
@@ -21,6 +26,14 @@ export default {
 
 body {
   background: $whiteSoft;
+  color: $blackSoft;
   font-family: 'Roboto', sans-serif;
+}
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 </style>
