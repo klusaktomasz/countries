@@ -11,7 +11,16 @@ export default {
 </script>
 
 <style lang="scss">
+*,
+*:before,
+*:after {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  box-sizing: border-box;
+}
+
 body {
-  background: $white;
+  background: $whiteSoft;
+  font-family: 'Roboto', sans-serif;
 }
 </style>
