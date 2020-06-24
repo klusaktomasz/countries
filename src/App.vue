@@ -1,16 +1,19 @@
 <template>
   <div id="app" class="app">
-    <CountriesHeader></CountriesHeader>
+    <CountriesHeader class="header"></CountriesHeader>
+    <CountryForm></CountryForm>
   </div>
 </template>
 
 <script>
 import CountriesHeader from '@/components/CountriesHeader.vue';
+import CountryForm from '@/components/CountryForm.vue';
 
 export default {
   name: 'App',
   components: {
     CountriesHeader,
+    CountryForm,
   },
 };
 </script>
@@ -35,5 +38,11 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
+  padding: 0 16px;
+}
+
+.header {
+  margin-bottom: 2em;
 }
 </style>
