@@ -4,7 +4,6 @@
       class="form__input"
       v-model="countryName"
       id="country-name"
-      @input ="handleNameChange"
     >
       Country name:
     </LabeledInput>
@@ -45,7 +44,19 @@ export default {
     data: null,
     isLoading: false,
   }),
+  watch: {
+    countryName() {
+      if (this.countryName.length === 0) {
+        return;
+      }
+
+      this.debouncedGetCountry();
+    },
+  },
   methods: {
+    setBackground(flagLink) {
+      document.body.style.background = `no-repeat center/cover url(${flagLink})`;
+    },
     async fetchCountryData(name) {
       this.isLoading = true;
       const res = await fetch(`${RESTCOUNTRIES_GET_BY_NAME}/${name}`);
@@ -57,14 +68,7 @@ export default {
 
       return res.json();
     },
-    changeBgToFlag(flagLink) {
-      document.body.style.background = `no-repeat center/cover url(${flagLink})`;
-    },
-    handleNameChange: _debounce(async function () {
-      if (this.countryName.length === 0) {
-        return;
-      }
-
+    async getCountry() {
       const fetchedData = await this.fetchCountryData(this.countryName);
       if (fetchedData === null) {
         // TODO(Tomasz Kłusak): Handle no data (e.g. no country for given name) - show message.
@@ -72,8 +76,11 @@ export default {
       }
       [this.data] = fetchedData;
 
-      this.changeBgToFlag(this.data.flag);
-    }, 400),
+      this.setBackground(this.data.flag);
+    },
+  },
+  created() {
+    this.debouncedGetCountry = _debounce(this.getCountry, 400);
   },
 };
 </script>
