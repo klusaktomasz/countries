@@ -4,6 +4,7 @@
       class="form__input"
       v-model="countryName"
       id="country-name"
+      @input ="handleNameChange"
     >
       Country name:
     </LabeledInput>
@@ -26,6 +27,8 @@
 </template>
 
 <script>
+import _debounce from 'lodash.debounce';
+
 import LabeledInput from '@/components/LabeledInput.vue';
 import CountryCard from '@/components/CountryCard.vue';
 
@@ -56,6 +59,9 @@ export default {
 
       return res.json();
     },
+    handleNameChange: _debounce(function () {
+      console.log(this.countryName);
+    }, 200),
   },
   created() {
     // this.fetchCountryData('');
