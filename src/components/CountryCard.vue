@@ -16,7 +16,7 @@ export default {
     code: { type: String, required: true },
     capital: { type: String, required: true },
     region: { type: String, required: true },
-    population: { type: String, required: true },
+    population: { type: Number, required: true },
     domain: { type: String, required: true },
     languages: { type: Array, required: true },
     currencies: { type: Array, required: true },

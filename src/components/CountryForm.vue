@@ -44,7 +44,6 @@ export default {
     countryName: '',
     data: null,
     isLoading: false,
-    error: false,
   }),
   methods: {
     async fetchCountryData(name) {
@@ -53,18 +52,23 @@ export default {
       this.isLoading = false;
 
       if (!res.ok) {
-        this.error = true;
         return null;
       }
 
       return res.json();
     },
-    handleNameChange: _debounce(function () {
-      console.log(this.countryName);
+    handleNameChange: _debounce(async function () {
+      if (this.countryName.length === 0) {
+        return;
+      }
+
+      const fetchedData = await this.fetchCountryData(this.countryName);
+      if (fetchedData === null) {
+        // TODO(Tomasz Kłusak): Handle no data (e.g. no country for given name) - show message.
+        return;
+      }
+      [this.data] = fetchedData;
     }, 200),
-  },
-  created() {
-    // this.fetchCountryData('');
   },
 };
 </script>
