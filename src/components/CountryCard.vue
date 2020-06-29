@@ -12,7 +12,7 @@ export default {
   name: 'CountryCard',
   props: {
     name: { type: String, required: true },
-    fullName: { type: String, required: true },
+    fullName: { type: [String, undefined], required: true },
     code: { type: String, required: true },
     capital: { type: String, required: true },
     region: { type: String, required: true },

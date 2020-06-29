@@ -57,6 +57,9 @@ export default {
 
       return res.json();
     },
+    changeBgToFlag(flagLink) {
+      document.body.style.background = `no-repeat center/cover url(${flagLink})`;
+    },
     handleNameChange: _debounce(async function () {
       if (this.countryName.length === 0) {
         return;
@@ -68,7 +71,9 @@ export default {
         return;
       }
       [this.data] = fetchedData;
-    }, 200),
+
+      this.changeBgToFlag(this.data.flag);
+    }, 400),
   },
 };
 </script>
