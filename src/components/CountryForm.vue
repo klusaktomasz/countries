@@ -4,13 +4,14 @@
       class="form__input"
       v-model="countryName"
       id="country-name"
+      ref="input"
     >
       Country name:
     </LabeledInput>
 
     <output class="form__output">
       <country-card
-        v-if="data"
+        v-if="false"
         :name="data.nativeName"
         :fullName="data.altSpellings[2]"
         :code="data.alpha3Code"
@@ -27,6 +28,7 @@
 
 <script>
 import _debounce from 'lodash.debounce';
+import gsap from 'gsap';
 
 import LabeledInput from '@/components/LabeledInput.vue';
 import CountryCard from '@/components/CountryCard.vue';
@@ -57,6 +59,21 @@ export default {
     setBackground(flagLink) {
       document.body.style.background = `no-repeat center/cover url(${flagLink})`;
     },
+    setInputPosition() {
+      const input = this.$refs.input.$el;
+      gsap.set(input, { position: 'absolute' });
+      // Animate top, bcs calculations of y would take too much (hiding header changes everything).
+      gsap.to(input, {
+        top: 16,
+        duration: 0.400,
+        ease: 'power1.out',
+      });
+    },
+    positionElements() {
+      this.$emit('country', true);
+      this.setBackground(this.data.flag);
+      this.setInputPosition();
+    },
     async fetchCountryData(name) {
       this.isLoading = true;
       const res = await fetch(`${RESTCOUNTRIES_GET_BY_NAME}/${name}`);
@@ -76,7 +93,7 @@ export default {
       }
       [this.data] = fetchedData;
 
-      this.setBackground(this.data.flag);
+      this.positionElements();
     },
   },
   created() {
@@ -92,5 +109,7 @@ export default {
 
 .form__input {
   width: 100%;
+  max-width: 388px;
+  will-change: top;
 }
 </style>

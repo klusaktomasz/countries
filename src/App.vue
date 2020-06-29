@@ -1,11 +1,13 @@
 <template>
   <div id="app" class="app">
-    <CountriesHeader class="app__header"></CountriesHeader>
-    <CountryForm class="app__form"></CountryForm>
+    <CountriesHeader class="app__header" ref="header"></CountriesHeader>
+    <CountryForm class="app__form" @country="toggleHeaderVisibility"></CountryForm>
   </div>
 </template>
 
 <script>
+import gsap from 'gsap';
+
 import CountriesHeader from '@/components/CountriesHeader.vue';
 import CountryForm from '@/components/CountryForm.vue';
 
@@ -14,6 +16,17 @@ export default {
   components: {
     CountriesHeader,
     CountryForm,
+  },
+  methods: {
+    toggleHeaderVisibility() {
+      const header = this.$refs.header.$el;
+
+      gsap.to(header, {
+        opacity: 0,
+        duration: 0.200,
+        onComplete: () => gsap.set(header, { display: 'none' }),
+      });
+    },
   },
 };
 </script>
