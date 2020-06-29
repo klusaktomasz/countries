@@ -1,7 +1,7 @@
 <template>
   <div id="app" class="app">
-    <CountriesHeader class="header"></CountriesHeader>
-    <CountryForm></CountryForm>
+    <CountriesHeader class="app__header"></CountriesHeader>
+    <CountryForm class="app__form"></CountryForm>
   </div>
 </template>
 
@@ -40,9 +40,16 @@ body {
   align-items: center;
   flex-direction: column;
   padding: 0 16px;
+  margin: 0 auto;
+  max-width: 420px;
 }
 
-.header {
+.app__header {
   margin-bottom: 2em;
+  width: 100%;
+}
+
+.app__form {
+  width: 100%;
 }
 </style>
