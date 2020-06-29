@@ -1,5 +1,5 @@
 <template>
-  <form class="form">
+  <form class="form" @submit.prevent="">
     <LabeledInput
       class="form__input"
       v-model="countryName"
