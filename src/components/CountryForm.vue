@@ -57,7 +57,7 @@ export default {
   },
   methods: {
     setBackground(flagLink) {
-      document.body.style.background = `no-repeat center/cover url(${flagLink})`;
+      document.body.style.background = `no-repeat center/100% url(${flagLink}) #f1f3f5`;
     },
     setInputPosition() {
       const input = this.$refs.input.$el;

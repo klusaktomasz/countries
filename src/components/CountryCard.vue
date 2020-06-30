@@ -48,7 +48,7 @@ export default {
 
 <style lang="scss" scoped>
 .country {
-  background: $white;
+  background: rgba($white, 0.96);
   padding: 1em;
   border-radius: 4px;
   box-shadow: 1px 2px 5px rgba($black, 0.8);
