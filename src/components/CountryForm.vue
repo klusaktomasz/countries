@@ -11,7 +11,7 @@
 
     <output class="form__output">
       <country-card
-        v-if="false"
+        v-if="data"
         :name="data.nativeName"
         :fullName="data.altSpellings[2]"
         :code="data.alpha3Code"
