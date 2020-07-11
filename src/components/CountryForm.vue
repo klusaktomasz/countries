@@ -49,29 +49,34 @@ export default {
   watch: {
     countryName() {
       if (this.countryName.length === 0) {
+        this.data = null;
         return;
       }
 
+      this.positionElements();
       this.debouncedGetCountry();
+    },
+    data() {
+      if (this.data?.flag) {
+        document.body.style.background = `no-repeat center/100% url(${this.data.flag}) #f1f3f5`;
+      } else {
+        document.body.style.background = 'unset';
+      }
     },
   },
   methods: {
-    setBackground(flagLink) {
-      document.body.style.background = `no-repeat center/100% url(${flagLink}) #f1f3f5`;
-    },
     setInputPosition() {
       const input = this.$refs.input.$el;
       gsap.set(input, { position: 'absolute' });
       // Animate top, bcs calculations of y would take too much (hiding header changes everything).
       gsap.to(input, {
         top: 16,
-        duration: 0.400,
-        ease: 'power1.out',
+        duration: 1,
+        ease: 'power3.out',
       });
     },
     positionElements() {
       this.$emit('country', true);
-      this.setBackground(this.data.flag);
       this.setInputPosition();
     },
     async fetchCountryData(name) {
@@ -89,11 +94,10 @@ export default {
       const fetchedData = await this.fetchCountryData(this.countryName);
       if (fetchedData === null) {
         // TODO(Tomasz Kłusak): Handle no data (e.g. no country for given name) - show message.
+        this.data = null;
         return;
       }
       [this.data] = fetchedData;
-
-      this.positionElements();
     },
   },
   created() {
