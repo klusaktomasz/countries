@@ -7,15 +7,12 @@
     }"
   >
     <slot></slot>
-    <input type="text"
+    <input class="labeled-input__input"
+           v-bind="$attrs"
+           :value="value"
            :id="id"
-           spellcheck="false"
-           autocomplete="off"
-           class="labeled-input__input"
            @focus="isFocused = true"
            @blur="isFocused = false"
-
-           :value="value"
            @input="$emit('input', $event.target.value)"
     >
   </label>
@@ -24,6 +21,7 @@
 <script>
 export default {
   name: 'LabeledInput',
+  inheritAttrs: false,
   props: {
     id: {
       type: String,

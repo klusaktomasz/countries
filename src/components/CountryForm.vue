@@ -1,6 +1,10 @@
 <template>
   <form class="form" @submit.prevent="">
     <LabeledInput
+      type="text"
+      spellcheck="false"
+      autocomplete="off"
+      autofocus
       class="form__input"
       v-model="countryName"
       id="country-name"
