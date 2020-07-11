@@ -1,5 +1,5 @@
 # Countries
-Demo: (not ready yet!)
+Demo: https://klusaktomasz.github.io/countries
 
 Find essential information about a country using Vue, GSAP and restcountries.eu API
 
