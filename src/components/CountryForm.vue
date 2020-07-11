@@ -81,6 +81,9 @@ export default {
   }),
   watch: {
     countryName() {
+      this.apiError = false;
+      this.noCountry = false;
+
       if (this.countryName.length === 0) {
         this.data = null;
         return;
