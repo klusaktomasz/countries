@@ -44,8 +44,6 @@ body {
   background: $whiteSoft;
   color: $blackSoft;
   font-family: 'Roboto', sans-serif;
-  will-change: background;
-  transition: background 0.2s ease-out;
 }
 
 .app {

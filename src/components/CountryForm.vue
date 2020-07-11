@@ -30,6 +30,16 @@
           :currencies="data.currencies"
         ></country-card>
       </transition>
+
+    <transition mode="out-in" @enter="animEnterFlag" @leave="animLeaveFlag">
+      <img
+        v-if="data"
+        :key="data.flag"
+
+        :src="data.flag"
+        alt=""
+        class="form__output-bg">
+    </transition>
     </output>
   </form>
 </template>
@@ -64,13 +74,13 @@ export default {
       this.positionElements();
       this.debouncedGetCountry();
     },
-    data() {
-      if (this.data?.flag) {
-        document.body.style.background = `no-repeat center/100% url(${this.data.flag}) #f1f3f5`;
-      } else {
-        document.body.style.background = 'unset';
-      }
-    },
+    // data() {
+    //   if (this.data?.flag) {
+    //     document.body.style.background = `no-repeat center/100% url(${this.data.flag}) #f1f3f5`;
+    //   } else {
+    //     document.body.style.background = 'unset';
+    //   }
+    // },
   },
   methods: {
     setInputPosition() {
@@ -125,6 +135,22 @@ export default {
         onComplete: done,
       });
     },
+    animEnterFlag(el, done) {
+      gsap.from(el, {
+        opacity: 0,
+        ease: 'power1.out',
+        duration: 0.4,
+        onComplete: done,
+      });
+    },
+    animLeaveFlag(el, done) {
+      gsap.to(el, {
+        opacity: 0,
+        ease: 'power1.out',
+        duration: 0.2,
+        onComplete: done,
+      });
+    },
   },
   created() {
     this.debouncedGetCountry = _debounce(this.getCountry, 400);
@@ -141,5 +167,14 @@ export default {
   width: 100%;
   max-width: 388px;
   will-change: top;
+}
+
+.form__output-bg {
+  position: fixed;
+  z-index: -1;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+
 }
 </style>
