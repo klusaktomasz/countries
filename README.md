@@ -1,6 +1,20 @@
 # Countries
-Demo: https://wonderful-johnson-8d0f77.netlify.app/
+Demo: https://klusaktomasz.github.io/countries
 
-Simple hello world app using Vue.
+Find essential information about a country using Vue, GSAP and restcountries.eu API
 
-**WARN: There are some security vulnerability as it was created a long ago.**
+## Project setup
+```
+yarn install
+```
+
+### Compiles and hot-reloads for development
+```
+yarn serve
+```
+
+### Compiles and minifies for production
+```
+yarn build
+```
+
