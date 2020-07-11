@@ -52,17 +52,17 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  padding: 0 16px;
-  margin: 0 auto;
-  max-width: 420px;
+  padding: 0 1em;
 }
 
 .app__header {
   margin-bottom: 2em;
   width: 100%;
+  max-width: 420px;
 }
 
 .app__form {
   width: 100%;
+  max-width: 420px;
 }
 </style>

@@ -6,6 +6,7 @@
       autocomplete="off"
       autofocus
       class="form__input"
+      :class="{ 'form__input--fixed': fixedInput }"
       v-model="countryName"
       id="country-name"
       ref="input"
@@ -63,6 +64,7 @@ export default {
     countryName: '',
     data: null,
     isLoading: false,
+    fixedInput: false,
   }),
   watch: {
     countryName() {
@@ -85,7 +87,7 @@ export default {
   methods: {
     setInputPosition() {
       const input = this.$refs.input.$el;
-      gsap.set(input, { position: 'absolute' });
+      this.fixedInput = true;
       // Animate top, bcs calculations of y would take too much (hiding header changes everything).
       gsap.to(input, {
         top: 16,
@@ -159,14 +161,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.form {
-  width: 100%;
-}
-
 .form__input {
-  width: 100%;
-  max-width: 388px;
   will-change: top;
+  width: 100%;
+  max-width: 420px;
+
+  &--fixed {
+    position: absolute;
+  }
 }
 
 .form__output-bg {
@@ -176,5 +178,12 @@ export default {
   top: 50%;
   transform: translate(-50%, -50%);
   max-width: 100%;
+}
+
+@media (max-width: 420px) {
+  .form__input--fixed {
+    left: 1em;
+    width: calc(100% - 2em);
+  }
 }
 </style>

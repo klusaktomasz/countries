@@ -43,7 +43,6 @@ export default {
   color: $blackSoft;
   padding: 0.75em 0.5em;
   border-radius: 4px;
-  margin-top: 8px;
   font-family: 'Roboto', sans-serif;
   cursor: text;
 
