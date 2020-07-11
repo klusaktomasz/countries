@@ -14,18 +14,22 @@
     </LabeledInput>
 
     <output class="form__output">
-      <country-card
-        v-if="data"
-        :name="data.nativeName"
-        :fullName="data.altSpellings[2]"
-        :code="data.alpha3Code"
-        :capital="data.capital"
-        :region="data.region"
-        :population="data.population"
-        :domain="data.topLevelDomain[0]"
-        :languages="data.languages"
-        :currencies="data.currencies"
-      ></country-card>
+      <transition mode="out-in" @enter="animEnterCard" @leave="animLeaveCard">
+        <country-card
+          v-if="data"
+          :key="data.nativeName"
+
+          :name="data.nativeName"
+          :fullName="data.altSpellings[2]"
+          :code="data.alpha3Code"
+          :capital="data.capital"
+          :region="data.region"
+          :population="data.population"
+          :domain="data.topLevelDomain[0]"
+          :languages="data.languages"
+          :currencies="data.currencies"
+        ></country-card>
+      </transition>
     </output>
   </form>
 </template>
@@ -102,6 +106,24 @@ export default {
         return;
       }
       [this.data] = fetchedData;
+    },
+    animEnterCard(el, done) {
+      gsap.from(el, {
+        y: '10%',
+        opacity: '0',
+        ease: 'power1.out',
+        duration: 0.4,
+        onComplete: done,
+      });
+    },
+    animLeaveCard(el, done) {
+      gsap.to(el, {
+        y: '-10%',
+        opacity: 0,
+        ease: 'power1.out',
+        duration: 0.2,
+        onComplete: done,
+      });
     },
   },
   created() {
