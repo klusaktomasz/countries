@@ -106,10 +106,12 @@ export default {
       this.setInputPosition();
     },
     async getCountry() {
+      // Fetch data
       this.isLoading = true;
       const res = await fetch(`${RESTCOUNTRIES_GET_BY_NAME}/${this.countryName}`);
       this.isLoading = false;
 
+      // Handle error (no country or api error)
       if (!res.ok) {
         this.data = null;
 
@@ -122,6 +124,7 @@ export default {
         return;
       }
 
+      // Manage data
       [this.data] = await res.json();
     },
     animEnterCard(el, done) {
