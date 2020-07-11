@@ -30,17 +30,28 @@
           :languages="data.languages"
           :currencies="data.currencies"
         ></country-card>
+        <div
+          v-else-if="noCountry"
+          class="form__error-message">
+          There is no country with given name
+        </div>
+        <div
+          v-else-if="apiError"
+          class="form__error-message">
+          There is problem with searching country (API Error).<br>
+          Try later.
+        </div>
       </transition>
 
-    <transition mode="out-in" @enter="animEnterFlag" @leave="animLeaveFlag">
-      <img
-        v-if="data"
-        :key="data.flag"
+      <transition mode="out-in" @enter="animEnterFlag" @leave="animLeaveFlag">
+        <img
+          v-if="data"
+          :key="data.flag"
 
-        :src="data.flag"
-        alt=""
-        class="form__output-bg">
-    </transition>
+          :src="data.flag"
+          alt=""
+          class="form__output-bg">
+      </transition>
     </output>
   </form>
 </template>
@@ -63,6 +74,8 @@ export default {
   data: () => ({
     countryName: '',
     data: null,
+    apiError: false,
+    noCountry: false,
     isLoading: false,
     fixedInput: false,
   }),
@@ -76,13 +89,6 @@ export default {
       this.positionElements();
       this.debouncedGetCountry();
     },
-    // data() {
-    //   if (this.data?.flag) {
-    //     document.body.style.background = `no-repeat center/100% url(${this.data.flag}) #f1f3f5`;
-    //   } else {
-    //     document.body.style.background = 'unset';
-    //   }
-    // },
   },
   methods: {
     setInputPosition() {
@@ -99,25 +105,24 @@ export default {
       this.$emit('country', true);
       this.setInputPosition();
     },
-    async fetchCountryData(name) {
+    async getCountry() {
       this.isLoading = true;
-      const res = await fetch(`${RESTCOUNTRIES_GET_BY_NAME}/${name}`);
+      const res = await fetch(`${RESTCOUNTRIES_GET_BY_NAME}/${this.countryName}`);
       this.isLoading = false;
 
       if (!res.ok) {
-        return null;
-      }
-
-      return res.json();
-    },
-    async getCountry() {
-      const fetchedData = await this.fetchCountryData(this.countryName);
-      if (fetchedData === null) {
-        // TODO(Tomasz Kłusak): Handle no data (e.g. no country for given name) - show message.
         this.data = null;
+
+        if (res.status === 404) {
+          this.noCountry = true;
+        } else {
+          this.apiError = true;
+        }
+
         return;
       }
-      [this.data] = fetchedData;
+
+      [this.data] = await res.json();
     },
     animEnterCard(el, done) {
       gsap.from(el, {
@@ -178,6 +183,17 @@ export default {
   top: 50%;
   transform: translate(-50%, -50%);
   max-width: 100%;
+}
+
+.form__error-message {
+  background: $white;
+  border-radius: 4px;
+  box-shadow: 1px 2px 5px rgba($black, 0.8);
+  padding: 2em 1em;
+  text-align: center;
+  color: $redDark;
+  font-size: 1.15em;
+  letter-spacing: 1px;
 }
 
 @media (max-width: 420px) {
